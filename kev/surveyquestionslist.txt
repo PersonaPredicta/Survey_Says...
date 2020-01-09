@@ -1,0 +1,73 @@
+QID2	survey_section	question_group	Is_required	question_text
+00	Survey	ID	TRUE	Entry Id
+01a	Work	Position	TRUE	Title
+01b	Work	Position	TRUE	Job Taxo ID
+01c	Work	Position	TRUE	Job ID
+02a	Work	Research Duties	TRUE	Conducting Research
+02b	Work	Research Duties	TRUE	Analyzing Research
+02c	Work	Research Duties	TRUE	Buying Research Reports
+02d	Work	Research Duties	TRUE	Managing Research Projects
+02e	Work	Research Duties	TRUE	Observing Research
+02f	Work	Research Duties	TRUE	Planning Research
+02g	Work	Research Duties	TRUE	Teaching Research
+02h	Work	Research Duties	TRUE	Advocating for Research
+02i	Work	Research Duties	TRUE	Hiring Research Vendors
+02j	Work	Research Duties	TRUE	Leading a Research Team or Organization
+03	Work	Company Size	FALSE	How many people does your company or organization employ?
+04	Work	Company researchers	FALSE	How many people in your company or organization have research as part of their role?
+08a	Experience	Research Experience	TRUE	Conducting Research
+08b	Experience	Research Experience	TRUE	Analyzing Research
+08c	Experience	Research Experience	TRUE	Buying Research Reports
+08d	Experience	Research Experience	TRUE	Managing Research Projects
+08e	Experience	Research Experience	TRUE	Observing Research
+08f	Experience	Research Experience	TRUE	Planning Research
+08g	Experience	Research Experience	TRUE	Teaching Research
+08h	Experience	Research Experience	TRUE	Advocating for Research
+08i	Experience	Research Experience	TRUE	Hiring Research Vendors
+08j	Experience	Research Experience	TRUE	Leading a Research Team or Organization
+11a	Learning	How You Learn	TRUE	Watch videos of talks
+11b	Learning	How You Learn	TRUE	Read blogs and/or books
+11c	Learning	How You Learn	TRUE	Attend a local meetup or talk
+11d	Learning	How You Learn	TRUE	Attend a longer form workshop
+11e	Learning	How You Learn	TRUE	Attend a conference
+12a	Learning	How You Want to Learn	TRUE	Watch a video of a talk
+12b	Learning	How You Want to Learn	TRUE	Read a blog post or Medium article
+12c	Learning	How You Want to Learn	TRUE	Read a book
+12d	Learning	How You Want to Learn	TRUE	"Ask in a LinkedIn group, Slack channel, or mailing list"
+12e	Learning	How You Want to Learn	TRUE	Ask a colleague or manager or mentor
+12f	Learning	How You Want to Learn	TRUE	Attend a local meetup or talk
+12g	Learning	How You Want to Learn	TRUE	Attend a conference
+12h	Learning	How You Want to Learn	TRUE	Attend a longer form workshop
+13a	Conference 1	Conference Factors	TRUE	Speakers you've heard of
+13b	Conference 1	Conference Factors	TRUE	Diversity of speakers' backgrounds and perspectives
+13c	Conference 1	Conference Factors	TRUE	Topics covered
+13d	Conference 1	Conference Factors	TRUE	Format of sessions
+13e	Conference 1	Conference Factors	TRUE	Networking opportunities
+13g	Conference 1	Conference Factors	TRUE	Variety of attendees to network with
+13h	Conference 1	Conference Factors	TRUE	Code of conduct in place
+13i	Conference 1	Conference Factors	TRUE	Conference location
+13j	Conference 1	Conference Factors	TRUE	Your (or your employer's) ability to pay
+13f	Conference 1	Conference Factors	TRUE	Number of attendees/degree of intimacy
+19a	Conference 2	Session Types	TRUE	Keynotes from leaders in research
+19b	Conference 2	Session Types	TRUE	Full length talks (30-60 minutes)
+19c	Conference 2	Session Types	TRUE	Short or Lightning talks (< 30 minutes)
+19d	Conference 2	Session Types	TRUE	Workshops
+19e	Conference 2	Session Types	TRUE	Networking events
+19f	Conference 2	Session Types	TRUE	"Social events (e.g., parties, karaoke, game night)"
+19g	Conference 2	Session Types	TRUE	Q&A/AMA (ask me anything) sessions
+19h	Conference 2	Session Types	TRUE	Discussion circles/topic tables
+20	Conference 2	Sessions of Interest	FALSE	Did we miss any other types of conference sessions that you'd like to mention?
+05	Work	Industry	TRUE	"What is your company or organization's primary industry (e.g., fintech, healthcare)?"
+06	Work	Current Research	FALSE	What types of research do you (or your  team) currently use to make decisions?
+07	Work	Future Research	FALSE	What types of research are you (or your  team) considering using in the future?
+10	Experience	Research Edcuation	FALSE	"Describe your educational background with research (e.g., you took classes, participated in running studies, majored in a research-related area)."
+14	Conference 1	Event Selection	FALSE	"How do you decide which events to attend? (If travel is a consideration, how so?)"
+15	Conference 1	Best Event	FALSE	What was the best professional learning event experience you've ever had? What made it great?
+16	Conference 1	Events Attended	FALSE	What (if any) events have you attended on the subject of research in the past few years?
+17a	Conference 2	Desired Size	TRUE	What would be the ideal audience size for a conference about research that *you* would want to attend?
+17b	Conference 2	Desired Size Cat	TRUE	Ideal Audience Size (Standardized)
+18a	Conference 2	Desired Structure	TRUE	What would be the ideal structure for a conference about research that *you* would want to attend?
+21	Conference 2	Desired Topics	FALSE	"If attending a conference about research, what subjects would *you* most want to see covered?"
+22	Conference 2	Desired Attendees	FALSE	"If attending a conference about research, who might you be excited to see there (e.g., types of people, specific individuals, organizations)?"
+23	Conference 2	Conference Advice	FALSE	LetÕs say (hypothetically of course) that Rosenfeld Media was exploring the idea of a conference about research. What advice would you give us?
+09a	Experience	Research Edcuation	TRUE	Did any part of your education include learning about how to conduct research?
