@@ -1,0 +1,57 @@
+{
+    'important5': {
+        'Not at all Important' : 0,
+        'Somewhat Important' : 1,
+        'Neutral' : 2,
+        'Important' : 3,
+        'Very Important': 4,
+        np.NaN: None
+    },
+    'likely5': {
+        'Extremely unlikely' : 0,
+        'Unlikely' : 1,
+        'Neutral' : 2,
+        'Likely' : 3,
+        'Extremely likely': 4,
+        np.NaN: None
+    },
+    'often4': {
+        'Never': 0,
+        'Rarely': 1,
+        'Sometimes': 2,
+        'Often': 3,
+        np.NaN: None
+    },
+    'often5': {
+        'Never': 0,
+        'Occasionally': 1,
+        'Neutral': 2,
+        'Often': 3,
+        'All or almost all': 4,
+        np.NaN: None
+    },
+    'tenure6': {
+        "0-1 year": 0,
+        "1-3 years": 1,
+        "3-5 years": 2,
+        "5-7 years": 3,
+        "7-10 years": 4,
+        "10+ years": 5,
+        np.NaN: None
+    },
+    'q03dict': {
+        "1-25 employees": 0,
+        "26-100 employees": 1, 
+        "101-500 employees": 2,
+        "501-1,000 employees": 3,
+        "1,000+ employees": 4,
+        np.NaN: None
+    },
+    'q04dict': {
+        "1-5 employees": 0,
+        "6-10 employees": 1,
+        "11-50 employees": 2,
+        "50+ employees": 3,
+        np.NaN: None
+    }
+}
