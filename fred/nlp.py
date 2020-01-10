@@ -1,6 +1,9 @@
 #Ah la la, Ah la la, Gimme Three wishes, I wanna be that Dirtyfinger and his six...
 
 from textblob import TextBlob
+import nltk
+
+import numpy as np
 import pandas as pd
 
 #Each function will be applied to the columns with the Series.apply() method 
@@ -21,8 +24,8 @@ def find_subjectivity(input_text):
 
 def create_sentiment_df(input_column):
     cols = ['text','polarity','subjectivity']
-    df = pd.DataFrame(columns=COLS)
-    df['original'] = input_column
+    df = pd.DataFrame(columns=cols)
+    df['text'] = input_column
     df['polarity'] = input_column.apply(find_polarity)
     df['subjectivity'] = input_column.apply(find_subjectivity)
     return df
