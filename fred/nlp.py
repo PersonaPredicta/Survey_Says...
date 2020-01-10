@@ -2,7 +2,6 @@
 
 from textblob import TextBlob
 import pandas as pd
-from itertools import islice
 
 #Each function will be applied to the columns with the Series.apply() method 
 
@@ -20,29 +19,10 @@ def find_subjectivity(input_text):
     """
     return TextBlob(input_text).sentiment.subjectivity
 
-
-
-
-# def create_sentiment_scores(orig_text):
-#     """
-#     Accepts a Series/df_column that of text responses. Outputs the polarity, subjectivity, and other scores 
-#     in a new dataframe.
-#     """
-
-#     pass
-
-#I'm just gonna write a few two line functions that append to a blank DF
-    # for index, row in islice(orig_df.iterrows(), 0, None):
-
-    #     new_entry = []
-    #     text_lower = to_lower(row['Responses'])
-    #     blob = TextBlob(text_lower)
-    #     sentiment = blob.sentiment
-            
-    #     polarity = sentiment.polarity
-    #     subjectivity = sentiment.subjectivity
-            
-    #     new_entry += [row['Response Date'],text_lower,sentiment,subjectivity,polarity]
-            
-    #     single_survey_sentimet_df = pd.DataFrame([new_entry], columns=COLS)
-    #     df = df.append(single_survey_sentimet_df, ignore_index=True)
+def create_sentiment_df(input_column):
+    cols = ['text','polarity','subjectivity']
+    df = pd.DataFrame(columns=COLS)
+    df['original'] = input_column
+    df['polarity'] = input_column.apply(find_polarity)
+    df['subjectivity'] = input_column.apply(find_subjectivity)
+    return df
