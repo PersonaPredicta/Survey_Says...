@@ -67,7 +67,14 @@ def make_word_counts(input_column):
         print(f"Top 5 words for topic #{i}:") 
         print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
         print('\n')
+#These are an ndarray that is as wide as the amount of topics defined by LDA. Each value in each vector
+#is the probability for each topic.
+    topic_values = LDA.transform(doc_term_matrix)
+#This will select the value in each row with the highest probability. The best guess for what its topic is.
+    topic_values.argmax(axis=1)
         pass
+
+
 
 def show_topic_words(input_column,n_topics=5):
     """
