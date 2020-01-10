@@ -23,7 +23,11 @@ def find_subjectivity(input_text):
     return TextBlob(input_text).sentiment.subjectivity
 
 def create_sentiment_df(input_column):
-    cols = ['text','polarity','subjectivity']
+    """
+    Accepts a column of text data. Returns a dataframe with the original text with their polarity and 
+    subjectivity scores appended to it.
+    """
+#    cols = ['text','polarity','subjectivity']
     df = pd.DataFrame(columns=cols)
     df['text'] = input_column
     df['polarity'] = input_column.apply(find_polarity)
