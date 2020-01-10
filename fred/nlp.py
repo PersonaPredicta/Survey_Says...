@@ -43,7 +43,9 @@ def make_word_counts(input_column):
 #words that are in sklearns stopword list.
     count_vect = CountVectorizer(max_df=0.8, min_df=2, stop_words='english')
 #The doc term matrix is a sparse matrix that has as many columns as there are words in the corpus/input_column.
+#count_vect is now 'fitted' to the corpus we gave it. It has some useful methods and attributes to use later.
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+#I'm unsure about the astype('U'), but it was in the tutorial I copied this stuff from
 
 #n_components defines how many topic/clusters will be sorted. 
     LDA = LatentDirichletAllocation(n_components=5, random_state=42)
@@ -52,4 +54,31 @@ def make_word_counts(input_column):
 #LDA, after fitting to the document term matrix, is an array of 5. Each element is a topic, with a probability of
 # each word/feature/column in the doc_term_matrix    
     first_topic = LDA.components_[0]
-    pass
+#This is the top 5 words/features in the first topic. It returns the index, so we have to look up the actual
+#word in the count_vect object
+    first_topic.argsort()[-5:]
+#loops through the 5 words, and passes them to the count_vect.get_feature_name method
+    for i in first_topic.argsort()[-5:]: 
+        print(count_vect.get_feature_names()[i])
+
+# Loops through the 5 topics, which are the LDA.components. 
+# The inner loop is is the loop above this one 
+    for i, topic in enumerate(LDA.components_): 
+        print(f"Top 5 words for topic #{i}:") 
+        print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
+        print('\n')
+        pass
+
+def show_topic_words(input_column,n_topics=5):
+    """
+    Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
+    5 is the default n of topics
+    """
+    count_vect = CountVectorizer(max_df=0.8, min_df=2, stop_words='english')
+    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+    LDA.fit(doc_term_matrix)
+    for i, topic in enumerate(LDA.components_): 
+        print(f"Top 5 words for topic #{i}:") 
+        print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
+        print('\n')
