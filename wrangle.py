@@ -127,6 +127,15 @@ def encode_columns(df, cols=map_df.col, encoder=encoder_dictionary, check_dicts=
 
   
 def wrangle_data():
+    '''
+    reads data from survey_responses.xlsx and applies the following transformations:
+        - encodes categoriacal variables
+        - calculates and applies persona labels
+        - assigns more descritive names for columns from data_dictionary
+
+    args: None
+    returns: pandas DataFrame
+    '''
     #get data
     data = pd.read_excel('../kev/survey_responses.xlsx', )
 
@@ -141,6 +150,6 @@ def wrangle_data():
 
     #update column names from data dictionary
     data_dictionary = pd.read_excel('../data_files/data_dictionary.xlsx')
-    data.columns = data_dictionary.column_name
+    data.rename(columns = data_dictionary[['qid','column_name']].set_index('qid').column_name, inplace = True)
 
     return data
