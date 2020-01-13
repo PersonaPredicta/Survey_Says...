@@ -7,7 +7,6 @@ import nltk
 import numpy as np
 import pandas as pd
 
-#Each function will be applied to the columns with the Series.apply() method 
 
 def find_polarity(input_text):
     """
@@ -16,12 +15,14 @@ def find_polarity(input_text):
     """
     return TextBlob(input_text).sentiment.polarity
 
+
 def find_subjectivity(input_text):
     """
     Takes one document and outputs a subjectivity score. 0 is cold objectivity, 1 is very subjective
     This function should be applied to a column and outputted to a new column.
     """
     return TextBlob(input_text).sentiment.subjectivity
+
 
 def create_sentiment_df(input_column):
     """
@@ -35,6 +36,7 @@ def create_sentiment_df(input_column):
     df['subjectivity'] = input_column.apply(find_subjectivity)
     return df
 
+
 def create_tfidf_matrix(input_column, max_df=0.8, min_df=0.2):
     """
     Creates a feature matrix. Matrix is as wide as the terms that meet the min/max parameters. Each document/row
@@ -43,6 +45,7 @@ def create_tfidf_matrix(input_column, max_df=0.8, min_df=0.2):
     tfidf_vect = TfidfVectorizer(max_df=max_df, min_df=min_df, stop_words='english')
     doc_term_matrix = tfidf_vect.fit_transform(input_column.values.astype('U'))
     return doc_term_matrix
+
 
 def create_wordcount_matrix(input_column, max_df=0.8, min_df=0.2):
     """
@@ -68,11 +71,19 @@ def show_LDA_topic_words(input_column,n_topics=5):
         print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
         print('\n')
 
-def show_nnm_topic_words():
+
+def show_nnm_topic_words(input_column, n_topics=5):
     """
     we will use TFIDF vectorizer since NMF works with TFIDF. We will create a document term matrix with TFIDF.
     """
-    pass
+    tfidf_vect = TfidfVectorizer(max_df=0.8, min_df=2, stop_words='english')
+    doc_term_matrix = tfidf_vect.fit_transform(input_column.values.astype('U'))
+    nmf = NMF(n_components=n_topics, random_state=42)
+    nmf.fit(doc_term_matrix )
+    for i, topic in enumerate(nmf.components_): 
+        print(f"Top 5 words for topic #{i}:") 
+        print([tfidf_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
+        print('\n')
 
 
 def make_word_counts(input_column):
