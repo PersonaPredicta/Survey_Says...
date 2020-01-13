@@ -26,9 +26,9 @@ def get_labels(x):
     if x[id_col] in specialist_ids:
         return 2
     if x[id_col] in other_ids:
-        if x[experience_col] in [4,5]:
+        if x[experience_col] in [5]:
             return 3
-        if x[experience_col] in [2,3]:
+        if x[experience_col] in [2,3,4]:
             return 4
         if x[experience_col] in [0,1]:
             return 5
