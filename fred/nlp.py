@@ -58,32 +58,36 @@ def create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1)):
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
     return doc_term_matrix, count_vect
 
+#USE MATRIX AND VECTORS from last two funcitons as parameters for the next two functions.
+# create_tfidf_matrix -> show_nmf_topic_words
+# create_wordcount_matrix -> show_LDA_topic_words
 
-def show_LDA_topic_words(input_column,n_topics=5, n_words=5):
+def show_LDA_topic_words(matrix, vector, input_column,n_topics=5, n_words=5):
     """
-    Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
-    5 is the default n of topics
+    Accepts a doc_term_matrix and a fitted vectorizing model (from previous function). 
+    Fits the LDA algorithm to the matrix.
+    Uses the features/words from the vectorizing model.
+    Prints the top n words for n topics.
     """
-    doc_term_matrix,count_vect = create_wordcount_matrix(input_column)
     LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-    LDA.fit(doc_term_matrix)
+    LDA.fit(matrix)
     for i, topic in enumerate(LDA.components_): 
         print(f"Top {n_words} words for topic #{i}:") 
-        print([count_vect.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
+        print([vector.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
         print('\n')
 
-def show_nmf_topic_words(input_column, n_topics=5, n_words=5):
+def show_nmf_topic_words(matrix, vector, n_topics=5, n_words=5):
     """
-    Uses TFIDF vectorizer since NMF works with TFIDF. 
-    Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
-    5 is the default n of topics
+    Accepts a doc_term_matrix and a fitted vectorizing model (from previous function). 
+    Fits the NMF algorithm to the matrix.
+    Uses the features/words from the vectorizing model.
+    Prints the top n words for n topics.
     """
-    doc_term_matrix,tfidf_vect = create_tfidf_matrix(input_column)
     nmf = NMF(n_components=n_topics, random_state=42)
-    nmf.fit(doc_term_matrix )
+    nmf.fit(matrix )
     for i, topic in enumerate(nmf.components_): 
         print(f"Top {n_words} words for topic #{i}:") 
-        print([tfidf_vect.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
+        print([vector.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
         print('\n')
 
 def create_sample_text():
