@@ -152,4 +152,7 @@ def wrangle_data():
     data_dictionary = pd.read_excel('../data_files/data_dictionary.xlsx')
     data.rename(columns = data_dictionary[['qid','column_name']].set_index('qid').column_name, inplace = True)
 
+    #set index
+    data.set_index('resp_id', inplace = True)
+
     return data
