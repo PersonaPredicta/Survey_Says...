@@ -50,7 +50,7 @@ def get_max_research_years(df):
     return max_research
     
 
-
+# declare rules for encoding
 encoder_dictionary = {
     'important5': {
         'Not at all Important' : 0,
@@ -109,7 +109,7 @@ encoder_dictionary = {
     }
 }
 
-
+# read mapping dictionary from question_library to map rules to corresponding columns
 map_df = pd.read_csv('../kev/question_library.txt').dropna().set_index('qid2')
 map_df['col'] = map_df.index
 
@@ -138,5 +138,9 @@ def wrangle_data():
 
     #apply labels
     data['persona_id'] = data.join(pd.DataFrame(research_years, columns=['research_years'])).apply(get_labels, axis=1)
+
+    #update column names from data dictionary
+    data_dictionary = pd.read_excel('../data_files/data_dictionary.xlsx')
+    data.columns = data_dictionary.column_name
 
     return data
