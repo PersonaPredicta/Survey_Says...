@@ -62,7 +62,7 @@ def create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1)):
 # create_tfidf_matrix -> show_nmf_topic_words
 # create_wordcount_matrix -> show_LDA_topic_words
 
-def show_LDA_topic_words(matrix, vector, input_column,n_topics=5, n_words=5):
+def show_LDA_topic_words(matrix, vector, n_topics=5, n_words=5):
     """
     Accepts a doc_term_matrix and a fitted vectorizing model (from previous function). 
     Fits the LDA algorithm to the matrix.
