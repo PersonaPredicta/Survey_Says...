@@ -43,8 +43,8 @@ def get_max_research_years(df):
     returns: max_research - pandas series
     '''
     #define columns that describe subject's research experience
-    research_columns = ['q02a', 'q02b', 'q02c', 'q02d', 'q02e',
-                        'q02f', 'q02g', 'q02h', 'q02i', 'q02j',]
+    research_columns = ['q08a', 'q08b','q08c', 'q08d', 'q08e', 
+                        'q08f', 'q08g', 'q08h', 'q08i', 'q08j']
         
     max_research = df[research_columns].apply(max, axis = 1)
     return max_research
