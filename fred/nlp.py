@@ -1,6 +1,6 @@
 #Ah la la, Ah la la, Gimme Three wishes, I wanna be that Dirtyfinger and his six...
-from sklearn.feature_extraction.text import CountVectorizer 
-from sklearn.decomposition import LatentDirichletAllocation
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.decomposition import LatentDirichletAllocation, NMF
 from textblob import TextBlob
 import nltk
 
@@ -34,6 +34,46 @@ def create_sentiment_df(input_column):
     df['polarity'] = input_column.apply(find_polarity)
     df['subjectivity'] = input_column.apply(find_subjectivity)
     return df
+
+def create_tfidf_matrix(input_column, max_df=0.8, min_df=0.2):
+    """
+    Creates a feature matrix. Matrix is as wide as the terms that meet the min/max parameters. Each document/row
+    will have a tf-idf score for each term.
+    """
+    tfidf_vect = TfidfVectorizer(max_df=max_df, min_df=min_df, stop_words='english')
+    doc_term_matrix = tfidf_vect.fit_transform(input_column.values.astype('U'))
+    return doc_term_matrix
+
+def create_wordcount_matrix(input_column, max_df=0.8, min_df=0.2):
+    """
+    Creates a feature matrix. Matrix is as wide as the terms that meet the min/max parameters. Each document/row
+    will have a wordcount for each term.
+    """
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english')
+    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+    return doc_term_matrix
+
+
+def show_LDA_topic_words(input_column,n_topics=5):
+    """
+    Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
+    5 is the default n of topics
+    """
+    count_vect = CountVectorizer(max_df=0.8, min_df=2, stop_words='english')
+    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+    LDA.fit(doc_term_matrix)
+    for i, topic in enumerate(LDA.components_): 
+        print(f"Top 5 words for topic #{i}:") 
+        print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
+        print('\n')
+
+def show_nnm_topic_words():
+    """
+    we will use TFIDF vectorizer since NMF works with TFIDF. We will create a document term matrix with TFIDF.
+    """
+    pass
+
 
 def make_word_counts(input_column):
     """
@@ -72,20 +112,4 @@ def make_word_counts(input_column):
     topic_values = LDA.transform(doc_term_matrix)
 #This will select the value in each row with the highest probability. The best guess for what its topic is.
     topic_values.argmax(axis=1)
-        pass
-
-
-
-def show_topic_words(input_column,n_topics=5):
-    """
-    Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
-    5 is the default n of topics
-    """
-    count_vect = CountVectorizer(max_df=0.8, min_df=2, stop_words='english')
-    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
-    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-    LDA.fit(doc_term_matrix)
-    for i, topic in enumerate(LDA.components_): 
-        print(f"Top 5 words for topic #{i}:") 
-        print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
-        print('\n')
+    pass
