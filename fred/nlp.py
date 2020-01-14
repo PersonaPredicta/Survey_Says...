@@ -4,6 +4,9 @@ from sklearn.decomposition import LatentDirichletAllocation, NMF
 from textblob import TextBlob
 import nltk
 
+import pyLDAvis
+import pyLDAvis.sklearn
+
 import numpy as np
 import pandas as pd
 
@@ -90,49 +93,19 @@ def show_nmf_topic_words(matrix, vector, n_topics=5, n_words=5):
         print([vector.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
         print('\n')
 
-def create_sample_text():
+def show_top_documents_per_topic(lda_H, lda_W, n_top_docs):
     """
-    Little snippet to generate the column I've been testing with
+    lda_H is LDA fitted to a tf/tfidf matrix.components_
+    lda_W is LDA.fit(matrix).transform(matrix)
+    n_top_docs is a integer for how many documents you want to represent a topic
     """
-    df = pd.read_csv('/Users/fredricklambuth/Documents/Notes/Reviews.csv')
-    df = df.head(20000)
-    return df.Text
+    for topic_idx, topic in enumerate(lda_H):
+        top_doc_indices = np.argsort( lda_W[:,topic_idx] )[::-1][0:no_top_documents]
+    for doc_index in top_doc_indices:
+        print(test_drive.iloc[doc_index])
 
-# def show_LDA_topic_words(input_column,n_topics=5):
-#     """
-#     Takes a column/Series as an input. Returns nothing. Prints the top 5 words for n topics.
-#     5 is the default n of topics
-#     """
-#     count_vect = CountVectorizer(max_df=0.8, min_df=2, stop_words='english')
-#     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
-#     LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-#     LDA.fit(doc_term_matrix)
-#     for i, topic in enumerate(LDA.components_): 
-#         print(f"Top 5 words for topic #{i}:") 
-#         print([count_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
-#         print('\n')
-
-
-# def show_nmf_topic_words(input_column, n_topics=5):
-#     """
-#     we will use TFIDF vectorizer since NMF works with TFIDF. We will create a document term matrix with TFIDF.
-#     """
-#     tfidf_vect = TfidfVectorizer(max_df=0.8, min_df=2, stop_words='english')
-#     doc_term_matrix = tfidf_vect.fit_transform(input_column.values.astype('U'))
-#     nmf = NMF(n_components=n_topics, random_state=42)
-#     nmf.fit(doc_term_matrix )
-#     for i, topic in enumerate(nmf.components_): 
-#         print(f"Top 5 words for topic #{i}:") 
-#         print([tfidf_vect.get_feature_names()[i] for i in topic.argsort()[-5:]]) 
-#         print('\n')
-
-# def create_ngrams_matrix(input_column, max_df=0.8, min_df=0.2):
-#     """
-#     Same as the create_wourdcount_matrix, but will also include bi/trigrams.
-#     """
-#     count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=(1,3))
-#     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
-#     return doc_term_matrix
+def show_plLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
+    pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
 
 
 def make_word_counts(input_column):
