@@ -93,16 +93,20 @@ def show_nmf_topic_words(matrix, vector, n_topics=5, n_words=5):
         print([vector.get_feature_names()[i] for i in topic.argsort()[-n_words:]]) 
         print('\n')
 
-def show_top_documents_per_topic(lda_H, lda_W, n_top_docs):
+
+def find_top_documents_per_topic(lda_W, documents):
     """
     lda_H is LDA fitted to a tf/tfidf matrix.components_
     lda_W is LDA.fit(matrix).transform(matrix)
     n_top_docs is a integer for how many documents you want to represent a topic
     """
-    for topic_idx, topic in enumerate(lda_H):
-        top_doc_indices = np.argsort( lda_W[:,topic_idx] )[::-1][0:no_top_documents]
-    for doc_index in top_doc_indices:
-        print(test_drive.iloc[doc_index])
+    df_W = pd.DataFrame(lda_W, index=documents.index)
+    indeces = df_W.idxmax(axis=0)
+    counter = 0
+    for i in indeces:
+        print(f'Top Document for Topic {counter}: \n')
+        print(documents[i] + '\n')
+        counter += 1
 
 def show_plLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
     pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
