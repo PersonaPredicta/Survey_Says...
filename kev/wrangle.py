@@ -283,4 +283,4 @@ def wrangle_data(
     # Reset Column Types
     data = reset_column_types(data, data_dictionary=data_dictionary)
     
-    return data
+    return data, data_dictionary
