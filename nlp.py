@@ -10,6 +10,8 @@ import pyLDAvis.sklearn
 import numpy as np
 import pandas as pd
 
+import unicodedata
+import re
 
 def find_polarity(input_text):
     """
