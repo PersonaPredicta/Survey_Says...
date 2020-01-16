@@ -109,7 +109,13 @@ def find_top_documents_per_topic(lda_W, documents,n_docs):
             print(documents[i] + '\n')
             counter += 1
 
-def show_plLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
+def pyLDAvis(input_column, n_topics):
+    matrix, vector = create_tfidf_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1))
+    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+    LDA.fit(matrix)
+    pyLDAvis.sklearn.prepare(LDA, matrix, vector)
+
+def show_pyLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
     pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
 
 
