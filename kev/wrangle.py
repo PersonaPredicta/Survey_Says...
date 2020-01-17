@@ -53,7 +53,7 @@ encoder_dictionary = {
     },
     "q09a_cats": {
         "Yes, I was taught how to conduct research ": 1,
-        "No, I was not taught how to conduct research": 2,
+        "No, I was not taught how to conduct research": 0,
     },
     "q17a_cats": {
         "Retreat/workshop: < 50 attendees": 1,
