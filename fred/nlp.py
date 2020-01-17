@@ -158,6 +158,6 @@ def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords)
     """
     input_column = input_column.dropna().apply(nlp.basic_clean)
     input_column = input_column.apply(nlp.lemmatize)
-    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=ngram_range
-    matrix = count_vect.fit_transform(input_column)
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=ngram_range)
+    count_vect.fit_transform(input_column)
     return list(count_vect.vocabulary_.keys())[:n_keywords]
