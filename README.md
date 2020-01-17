@@ -51,16 +51,33 @@ RM is experienced with on-line survey design and implementation. RM piloted the 
 
 
 ### Survey layout
-The online survey consists of 23 main questions, divided among free-text, Likert-scale and combined-response questions. Six questions were multipart (all Likert). In total, the survey consistent of 68 questions. The survey tool is included in this GitHub
+The online survey consists of 23 main questions, divided among free-text, Likert-scale and combined-response questions. Six questions were multipart (all Likert). In total, the survey consistent of 68 questions. The survey tool is included in this GitHub. While the survey tool included numerous required questions, respondents could submit an incomplete survey.
+
+
+### Survey output
+The survey response far exceeded expectations: 100 anticipated and 860 actual responses. Approximately 150 incomplete surveys were submitted, creating challenges for analysis.
 
 
 ### Previous analysis
+RM requested UX experts to tabulate th
+
+https://public.tableau.com/profile/sean.oslin#!/vizhome/WhoDoesResearchandHowDoTheyLearn_15693334108800/StoryDraft1
+
+### Acquire
 
 
-### Included in the Github for this project
-README with background on the project
-Jupyter notebook with Python functions and findings
-Text files with functions for the various stages of the product
+### Wrangle
 
+
+### Explore
+
+
+### Model
+
+
+### Minimum viable project (MVP)
+The MVP used a support vector machine (SVM) classification model with the attributes taxo_id, the max of years_of_exp (all 10 questions) and company_size to predict the 5 previously determined personas. We used the same attributes as the previously the analysis 
+
+The model replicated the results of the previous analysis
 
 https://public.tableau.com/profile/sean.oslin#!/vizhome/WhoDoesResearchandHowDoTheyLearn_15693334108800/StoryDraft1
