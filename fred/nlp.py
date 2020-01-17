@@ -13,6 +13,8 @@ import pandas as pd
 import unicodedata
 import re
 
+
+
 def find_polarity(input_text):
     """
     Takes one document and outputs a polarity score. -1 is Very Negative, 1 is Super Positive
@@ -156,8 +158,19 @@ def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords)
     Use a column/Series. Indicate the maximum and minimum amount of documents the words to be anlayzed. And ngram size
     Returns a list 
     """
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS as esw
+    stopWords = ['yes', 'sort', 've', 'thing', 'try', '50', 'conference'] + list(esw) 
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
-    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=ngram_range)
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stopWords, ngram_range=ngram_range)
     count_vect.fit_transform(input_column)
     return list(count_vect.vocabulary_.keys())[:n_keywords]
+
+def assign_topic(input_column):
+    count_vect = CountVectorizer(max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3))
+    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+    LDA = LatentDirichletAllocation(n_components=3, random_state=42)
+    LDA.fit(doc_term_matrix)
+    lda_H = LDA.transform(doc_term_matrix)
+    topic_doc_df = pd.DataFrame(lda_H)
+    return topic_doc_df.idxmax(axis=1)
