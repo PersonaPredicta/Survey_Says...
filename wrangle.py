@@ -120,9 +120,9 @@ def get_labels(x):
     if x[id_col] in specialist_ids:
         return 2
     if x[id_col] in other_ids:
-        if x[experience_col] in [5]:
+        if x[experience_col] in [5,4]:
             return 3
-        if x[experience_col] in [2,3,4]:
+        if x[experience_col] in [2,3]:
             return 4
         if x[experience_col] in [0,1]:
             return 5
@@ -134,16 +134,17 @@ def get_max_research_years(df):
     '''
     function takes in dataframe, grabs all columns pertaining to research years (q2:a-j) encodes them and labels subject the value from the column with the higest value
 
+    *** amended because further research informed us that grouping all experience columns by max was not the way the personas were origionally classified, previous code is left as comments
+
     args: df - pandas dataframe
     returns: max_research - pandas series
     '''
     #define columns that describe subject's research experience
-    research_columns = ['q08a', 'q08b','q08c', 'q08d', 'q08e', 
-                        'q08f', 'q08g', 'q08h', 'q08i', 'q08j']
+    research_columns = ['q08a']#, 'q08b','q08c', 'q08d', 'q08e', 
+                        #'q08f', 'q08g', 'q08h', 'q08i', 'q08j']
         
     max_research = df[research_columns].apply(max, axis = 1)
     return max_research
-    
 
 # Get data dictionary
 def get_data_dictionary(path_prefix='', dictionary_path='data_files/data_dictionary.xlsx'):

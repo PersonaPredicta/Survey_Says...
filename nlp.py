@@ -141,3 +141,23 @@ def basic_clean(text):
     text = re.sub(r"[^a-z0-9'\s]", '', text)
     text = re.sub(r"[\r|\n|\r\n]+", ' ', text)
     return text
+
+def create_persona_corpus(df, persona_n):
+    df_qual = df.select_dtypes(include='object')
+    persona_id = df['persona_id']
+    df_qual = df_qual.fillna('n/a')
+    df_qual = df_qual.astype('str')
+    df_qual['big_answer'] = df_qual['research_educ'] + df_qual['research_educ_desc'] + df_qual['how_pick_events'] + df_qual['best_event'] + df_qual['events_attend_recent'] + df_qual['ideal_conference_size'] + df_qual['ideal_structure'] + df_qual['other_conference_types'] + df_qual['ideal_topics'] + df_qual['ideal_attendees'] + df_qual['recommendations']
+    df_qual['persona_id'] = persona_id
+    return df_qual[df_qual.persona_id == persona_n]
+
+def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords):
+    """
+    Use a column/Series. Indicate the maximum and minimum amount of documents the words to be anlayzed. And ngram size
+    Returns a list 
+    """
+    input_column = input_column.dropna().apply(basic_clean)
+    input_column = input_column.apply(lemmatize)
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=ngram_range)
+    count_vect.fit_transform(input_column)
+    return list(count_vect.vocabulary_.keys())[:n_keywords]
