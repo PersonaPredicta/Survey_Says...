@@ -149,7 +149,7 @@ def create_persona_corpus(df, persona_id):
     df_qual = df_qual.astype('str')
     df_qual['persona_id'] = persona_id
     df_qual['big_answer'] = df_qual['research_educ'] + df_qual['research_educ_desc'] + df_qual['how_pick_events'] + df_qual['best_event'] + df_qual['events_attend_recent'] + df_qual['ideal_conference_size'] + df_qual['ideal_structure'] + df_qual['other_conference_types'] + df_qual['ideal_topics'] + df_qual['ideal_attendees'] + df_qual['recommendations']
-    return execs = df_qual[df_qual.persona_id == persona_id]
+    return df_qual[df_qual.persona_id == persona_id]
 
 def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords):
     """
