@@ -53,7 +53,7 @@ encoder_dictionary = {
     },
     "q09a_cats": {
         "Yes, I was taught how to conduct research ": 1,
-        "No, I was not taught how to conduct research": 2,
+        "No, I was not taught how to conduct research": 0,
     },
     "q17a_cats": {
         "Retreat/workshop: < 50 attendees": 1,
@@ -276,7 +276,8 @@ def wrangle_data(
 
     # Update column names from data dictionary
     data.rename(columns = data_dictionary.column_name, inplace = True)
-    data = data[data_dictionary.column_name]
+    keep_cols=data_dictionary[data_dictionary.in_wrangle].sort_index().column_name.copy()
+    data = data[keep_cols]
 
     #set index
     data.set_index('resp_id', inplace = True)
