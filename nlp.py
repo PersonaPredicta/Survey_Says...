@@ -174,3 +174,13 @@ def assign_topic(input_column):
     lda_H = LDA.transform(doc_term_matrix)
     topic_doc_df = pd.DataFrame(lda_H)
     return topic_doc_df.idxmax(axis=1)
+
+def set_stop_words(stop_words):
+    """
+    Takes a list of strings. These strings will be appended to the 'english' stop words used in sklearn
+    objects that have a stopword parameter.
+    Returns a very big list. Assign this to the stopwords parameter in the sklearn objects.
+    """
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS as esw
+    stopWords = stop_words + list(esw) 
+    return stopWords
