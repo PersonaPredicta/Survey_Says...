@@ -7,7 +7,7 @@ Kevin Eliasen, Fred Lambuth, Sean Oslin and Dom Pedrotti
 
 
 ### Project sponsor
-Rosenfeld Media  https://rosenfeldmedia.com
+Rosenfeld Media (RM)  https://rosenfeldmedia.com
 
 
 ### Request from Rosenfeld Media (RM)
@@ -24,7 +24,8 @@ In order to save time and labor, RM wanted to automate the process of extracting
 - Survey tool
 - Jupyter notebook with Python functions and findings
 - Text files for each stage of the data science pipeline, including functions
--Background information on the survey, resources on personas
+- Background information on the survey, resources on building personas
+- Analysis from a different team that used different analysis techniques
 
 
 ### Background (from an interview with Lou Rosenfeld, President, Rosenfeld Media)
@@ -47,27 +48,30 @@ In order to save time and labor, RM wanted to automate the process of extracting
 
 
 ### Survey design
-RM is experienced with on-line survey design and implementation. RM piloted the survey with a dozen people. They accidentally omitted survey restrictions prohibiting responders from skipping required questions and submitting incomplete surveys. RM consciously omitted many questions regarding respondent demographics and location as not relevant to the goal of the survey.
+RM is experienced with on-line survey design and implementation. RM piloted the survey with a dozen people. When setting up the survey, RM accidentally omitted restrictions prohibiting responders from skipping required questions and submitting incomplete surveys. RM consciously excluded many questions regarding respondent demographics and location as not relevant to the goal of the survey.
 
 
 ### Survey layout
-The online survey consists of 23 main questions, divided among free-text, Likert-scale and combined-response questions. Six questions were multipart (all Likert). In total, the survey consistent of 68 questions. The survey tool is included in this GitHub. While the survey tool included numerous required questions, respondents could submit an incomplete survey.
+The online survey consists of 23 main questions, divided among free-text, Likert-scale and combined-response questions. Six questions were multipart (all Likert). In total, the survey consistent of 68 questions. The survey tool is included in the GitHub for this project. While the survey tool included numerous required questions, respondents could submit an incomplete survey.
 
 
 ### Survey output
-The survey response far exceeded expectations: 100 anticipated and 860 actual responses. Approximately 150 incomplete surveys were submitted, creating challenges for analysis.
+The survey response far exceeded expectations: 100 anticipated and 860 actual responses. Approximately 150 incomplete surveys were submitted, creating challenges for analysis. The data was output to a single Excel spreadsheet.
 
 
 ### Previous analysis
-RM requested UX experts to tabulate th
+RM requested UX experts to clean and tabulate the survey data. An initial statistical analysis determined that 
 
 https://public.tableau.com/profile/sean.oslin#!/vizhome/WhoDoesResearchandHowDoTheyLearn_15693334108800/StoryDraft1
 
 ### Acquire
-
+RM made a few changes to the data before giving it to our team. The most important change was reducing the 28 unique job titles of survey respondents to 9 'taxo_id' titles. These changes were applied by grouping like titles (e.g UX designer and UX researcher) and combining titles with only a small number of respondents (e.g. enthnologist) into the 'specialist' taxo_id. RM broke down the preferred conference size mixed-response question to include additional categories ('no preference', 'it depends', or 'virtual'). Our team accepted all of these changes to the raw data.  
 
 ### Wrangle
-
+Data preparation included the following
+- Converting all text answers to the Likert question (e.g. always, somewhat, never) to numbers
+- For the mixed questions, the preselected choices (e.g. Yes, I was taught research at school; No, I was not taught research at school) were tabulated. The free text was read by the team and the responses, where possible, were rolled into the preselected choices (e.g. on-the-job learning was categorized as not learning at school). For the preferred conference format mixed-response question, the free-text responses that could not be assigned to one of the existing choices did fall into two distinct new catergories - 'mixed' and 'no preference' - and were coded accordingly. Next we created three new non-exclusive, binary variables: single-track, multi-track and unconference. If a respondent specified one or more one of these three options, a 1 was placed in the corresponding variable(s). Respondents who stated no preference left as 0.
+- The number of missing values for required questions was significant, with the number of missing values increasing as the 
 
 ### Explore
 
@@ -80,4 +84,4 @@ The MVP used a support vector machine (SVM) classification model with the attrib
 
 The model replicated the results of the previous analysis
 
-https://public.tableau.com/profile/sean.oslin#!/vizhome/WhoDoesResearchandHowDoTheyLearn_15693334108800/StoryDraft1
+
