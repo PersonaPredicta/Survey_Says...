@@ -166,10 +166,10 @@ def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords)
     count_vect.fit_transform(input_column)
     return list(count_vect.vocabulary_.keys())[:n_keywords]
 
-def assign_topic(input_column):
-    count_vect = CountVectorizer(max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3))
+def assign_topic(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
-    LDA = LatentDirichletAllocation(n_components=3, random_state=42)
+    LDA = LatentDirichletAllocation(n_components=n_components, random_state=42)
     LDA.fit(doc_term_matrix)
     lda_H = LDA.transform(doc_term_matrix)
     topic_doc_df = pd.DataFrame(lda_H)
