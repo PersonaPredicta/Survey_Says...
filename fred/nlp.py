@@ -55,7 +55,7 @@ def create_tfidf_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1)):
     return doc_term_matrix, tfidf_vect
 
 
-def create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1)):
+def create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1), stop_words='english'):
     """
     Creates a feature matrix. Matrix is as wide as the terms that meet the min/max parameters. Each document/row
     will have a wordcount for each term.
@@ -167,8 +167,8 @@ def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords)
     return list(count_vect.vocabulary_.keys())[:n_keywords]
 
 def assign_topic(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
-    input_column = input_column.dropna().apply(nlp.basic_clean)
-    input_column = input_column.apply(nlp.lemmatize)
+    input_column = input_column.dropna().apply(basic_clean)
+    input_column = input_column.apply(lemmatize)
     count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
     LDA = LatentDirichletAllocation(n_components=n_components, random_state=42)
