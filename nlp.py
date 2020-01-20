@@ -61,7 +61,7 @@ def create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1), sto
     will have a wordcount for each term.
     Can find ngrams, but has default set to 1-word ngrams. Set ngrams to (1,n) to look for ngrams.
     """
-    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words='english', ngram_range=ngram)
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram)
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
     return doc_term_matrix, count_vect
 
