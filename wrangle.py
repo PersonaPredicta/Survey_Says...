@@ -212,7 +212,7 @@ def apply_special_encoding(df):
     df['q03c0'] = df.q03.isin([0,1])
     df['q03c1'] = df.q03.isin([2,3])
     df['q03c2'] = df.q03 == 4
-    df['q04r0'] = df.q03.isin([0,1])
+    df['q04r0'] = df.q04.isin([0,1])
     df['q04r1'] = df.q04 == 2
     df['q04r2'] = df.q04 == 3
     df['q17cs1'] = df.q17c == 1
