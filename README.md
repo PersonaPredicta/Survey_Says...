@@ -15,7 +15,7 @@ We were asked to apply data science methods to quantitative and qualitative surv
 
 
 ### Goal
-In order to save time and labor, RM wanted to automate the process of extracting actionable information from future surveys. In particular, the company wanted the ability to create survey-respondent profiles that can inform conference design and assist with conference marketing.
+In order to save time and labor, RM wanted to automate the process of extracting actionable information from future surveys. In particular, the company wants the ability to create survey-respondent profiles that can inform conference design and assist with conference marketing.
 
 
 ### Included in the Github for this project
@@ -56,7 +56,7 @@ The online survey consists of 23 main questions, divided among free-text, Likert
 
 
 ### Survey output
-The survey response far exceeded expectations: 100 anticipated and 860 actual responses. Approximately 150 incomplete surveys were submitted, creating challenges for analysis. The data was output to a single Excel spreadsheet.
+The survey response far exceeded expectations: 100 anticipated and 860 actual responses. Approximately 150 incomplete surveys were submitted. The data was output to a single Excel spreadsheet.
 
 
 ### Previous analysis
@@ -71,10 +71,15 @@ RM made a few changes to the data before giving it to our team. The most importa
 Data preparation included the following
 - Converting all text answers to the Likert question (e.g. always, somewhat, never) to numbers
 - For the mixed questions, the preselected choices (e.g. Yes, I was taught research at school; No, I was not taught research at school) were tabulated. The free text was read by the team and the responses, where possible, were rolled into the preselected choices (e.g. on-the-job learning was categorized as not learning at school). For the preferred conference format mixed-response question, the free-text responses that could not be assigned to one of the existing choices did fall into two distinct new catergories - 'mixed' and 'no preference' - and were coded accordingly. Next we created three new non-exclusive, binary variables: single-track, multi-track and unconference. If a respondent specified one or more one of these three options, a 1 was placed in the corresponding variable(s). Respondents who stated no preference left as 0.
-- The number of missing values for required questions was significant, with the number of missing values increasing as the 
+- The number of missing values for required questions was significant, with the number of missing values increasing as the survey progressed. We decided to eliminate all responses that did not complete the last set of required Likert questions. The total number of records dropped from 868 to 726. No additional deletions were necessary.
 
 ### Explore
 
+Started fitting a model to predict respondent's likely hood score. This was to test the hypothesis: If we can build a model that predicts likely hood, then we can identify key features that drive the target. After test of hypothesis, I discovered that the only features with high correlation to our target had any predictive model so the plan was scraped.
+
+Replace did any part of your education include research with [none, a little, some, a lot, and gobs*] Leikerts indicating how much learning about research came from various sources: [formal education, self-taught, side classes, or on-the-job]
+Add "no preference" and "it depends" to preferred conference size OR change the existing options to Leikerts
+Change the existing options for preferred conference format to Leikerts OR add "no preference" and "mixed".
 
 ### Model
 
