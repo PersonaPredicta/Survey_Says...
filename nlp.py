@@ -166,7 +166,11 @@ def show_persona_keywords(input_column, max_df, min_df, ngram_range, n_keywords)
     count_vect.fit_transform(input_column)
     return list(count_vect.vocabulary_.keys())[:n_keywords]
 
-def assign_topic(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
+def assign_topic_column(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
+    """
+    takes a pandas column/Series. Runs through the topic modeling pipeline. Assigns the topic_id
+    to each row. topic_id with highest probability is assigned.
+    """
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
     count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
@@ -176,6 +180,17 @@ def assign_topic(input_column, max_df=.8, min_df=2, stop_words='english', ngram_
     lda_H = LDA.transform(doc_term_matrix)
     topic_doc_df = pd.DataFrame(lda_H)
     return topic_doc_df.idxmax(axis=1)
+
+def pair_topic_with_text(text_column, topic_column):
+    """
+    Takes the raw text column from the wrangle dataframe and the topic column made by the assign_topic function.
+    Creates a dataframe with each of the inputs as columns.
+    """
+    text_column = text_column.reset_index()
+    test_df = pd.DataFrame()
+    test_df['text'] = test_column[text_column.columns[1]]
+    test_df['topic_id'] = topic_column
+    return test_df 
 
 def set_stop_words(stop_words):
     """
