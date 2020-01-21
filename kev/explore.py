@@ -221,7 +221,6 @@ def countplot_tricols(df0, df1, df2, cols):
             x0 = plot_col0.index
             y0 = plot_col0.to_list()
             n0 = len(y0)
-            w0 = 1 - (.6 / (n0-1))
             plot0 = True
             plot_it=True
         if chk_col in cols1:
@@ -229,7 +228,6 @@ def countplot_tricols(df0, df1, df2, cols):
             x1 = plot_col1.index
             y1 = plot_col1.to_list()
             n1 = len(y1)
-            w1 = 1 - (.6 / (n1-1))
             plot1 = True
             plot_it=True
         if chk_col in cols2:
@@ -237,11 +235,9 @@ def countplot_tricols(df0, df1, df2, cols):
             x2 = plot_col2.index
             y2 = plot_col2.to_list()
             n2 = len(y2)
-            w2 = 1 - (.6 / (n2-1))
             plot2 = True
             plot_it=True
         if plot_it:
-            print('0:', n0, w0, '1:', n1, w1, '2:', n2, w2)
             fig, axs = plt.subplots(
                 nrows=1, 
                 ncols=3, 

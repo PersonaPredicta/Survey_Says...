@@ -208,6 +208,19 @@ def drop_reqd_nas(df, reqd_cols):
     
     return df
 
+def apply_special_encoding(df):
+    df['q03c0'] = df.q03.isin([0,1])
+    df['q03c1'] = df.q03.isin([2,3])
+    df['q03c2'] = df.q03 == 4
+    df['q04r0'] = df.q03.isin([0,1])
+    df['q04r1'] = df.q04 == 2
+    df['q04r2'] = df.q04 == 3
+    df['q17cs1'] = df.q17c == 1
+    df['q17cs2'] = df.q17c == 2
+    df['q17cs3'] = df.q17c == 3
+    df['q17cs4'] = df.q17c == 4
+    return df
+
 
 def reset_column_types(df, data_dictionary):
     chk_cols = data_dictionary[['column_name', 'data_type']].set_index('column_name')
@@ -266,6 +279,9 @@ def wrangle_data(
     
     #find max research years to be used in label category
     research_years = get_max_research_years(data)
+
+    # Apply special encoding
+    data = apply_special_encoding(data)
 
     # Apply labels
     data['persona_id'] = (
