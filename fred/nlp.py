@@ -144,6 +144,15 @@ def basic_clean(text):
     text = re.sub(r"[\r|\n|\r\n]+", ' ', text)
     return text
 
+def create_corpus(df):
+    df_qual = df.select_dtypes(include='object')
+    persona_id = df['persona_id']
+    df_qual = df_qual.fillna('n/a')
+    df_qual = df_qual.astype('str')
+    df_qual['big_answer'] = df_qual['research_educ'] + df_qual['research_educ_desc'] + df_qual['how_pick_events'] + df_qual['best_event'] + df_qual['events_attend_recent'] + df_qual['ideal_conference_size'] + df_qual['ideal_structure'] + df_qual['other_conference_types'] + df_qual['ideal_topics'] + df_qual['ideal_attendees'] + df_qual['recommendations']
+    df_qual['persona_id'] = persona_id
+    return df_qual
+
 def create_persona_corpus(df, persona_n):
     df_qual = df.select_dtypes(include='object')
     persona_id = df['persona_id']
@@ -171,7 +180,9 @@ def assign_topic_column(input_column, max_df=.8, min_df=2, stop_words='english',
     takes a pandas column/Series. Runs through the topic modeling pipeline. Assigns the topic_id
     to each row. topic_id with highest probability is assigned.
     """
-    input_column = input_column.dropna().apply(basic_clean)
+    input_column = input_column.astype('str')
+    input_column = input_column.fillna('nan')
+    input_column = input_column.apply(basic_clean)
     input_column = input_column.apply(lemmatize)
     count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
     doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
@@ -179,18 +190,48 @@ def assign_topic_column(input_column, max_df=.8, min_df=2, stop_words='english',
     LDA.fit(doc_term_matrix)
     lda_H = LDA.transform(doc_term_matrix)
     topic_doc_df = pd.DataFrame(lda_H)
-    return topic_doc_df.idxmax(axis=1)
+    return topic_doc_df.idxmax(axis=1), topic_doc_df.max(axis=1)
 
-def pair_topic_with_text(text_column, topic_column):
+def assign_topic_column_probability(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
+    """
+    takes a pandas column/Series. Runs through the topic modeling pipeline. Assigns the topic_id
+    to each row. topic_id with highest probability is assigned.
+    """
+    input_column = input_column.fillna('nan')
+    input_column = input_column.astype('str')
+    input_column = input_column.apply(basic_clean)
+    input_column = input_column.apply(lemmatize)
+    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
+    doc_term_matrix = count_vect.fit_transform(input_column.values.astype('U'))
+    LDA = LatentDirichletAllocation(n_components=n_components, random_state=42)
+    LDA.fit(doc_term_matrix)
+    lda_H = LDA.transform(doc_term_matrix)
+    topic_doc_df = pd.DataFrame(lda_H)
+    return topic_doc_df.max(axis=1)
+
+def pair_topic_with_text(text_column, topic_column, prob_column, name):
     """
     Takes the raw text column from the wrangle dataframe and the topic column made by the assign_topic function.
     Creates a dataframe with each of the inputs as columns.
     """
     text_column = text_column.reset_index()
     test_df = pd.DataFrame()
-    test_df['text'] = test_column[text_column.columns[1]]
-    test_df['topic_id'] = topic_column
-    return test_df 
+    test_df[name + '_text'] = text_column[text_column.columns[1]]
+    test_df[name + '_topic_id'] = topic_column
+    test_df[name + '_probability'] = prob_column
+    return test_df
+
+# def pair_topic_with_text(text_column, topic_column, prob_column):
+#     """
+#     Takes the raw text column from the wrangle dataframe and the topic column made by the assign_topic function.
+#     Creates a dataframe with each of the inputs as columns.
+#     """
+#     text_column = text_column.reset_index()
+#     test_df = pd.DataFrame()
+#     test_df['text'] = text_column[text_column.columns[1]]
+#     test_df['topic_id'] = topic_column
+#     test_df['probability'] = prob_column
+#     return test_df 
 
 def set_stop_words(stop_words):
     """
