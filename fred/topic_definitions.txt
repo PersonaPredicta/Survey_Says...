@@ -1,0 +1,42 @@
+Question 5
+    8 topics
+
+Question 6
+    8 topics
+
+Question 7
+    8 topics
+
+Question 10
+    4 topics
+
+Question 14
+    6 topics
+
+Question 15
+    TBD/null
+
+Question 16
+    7 topics
+        topic 1: london
+        topic 2: ux australia
+        topic 3: uk brighton, MUDDLED
+        topic 4: strive, toronto
+        topic 5: nerd, specifically research
+        topic 6: local meetups
+        topic 7: qrca
+
+Question 20
+    4 topics
+
+Question 21
+    4 topics
+        topic 2: finding/data
+        topic 3: ops/ai
+
+Questions 22
+    4 topics
+
+Question 23
+    4 topics
+        topic 4: miscelaneous 
