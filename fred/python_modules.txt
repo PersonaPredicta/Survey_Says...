@@ -1,0 +1,11 @@
+pandas
+numpy
+json
+matplotlib
+seaborn
+scipy
+sklearn
+
+textblob
+nltk
+pyldavis
