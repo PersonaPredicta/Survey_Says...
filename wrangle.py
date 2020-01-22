@@ -96,6 +96,24 @@ join_files = {
 }
 
 
+persona_names = {
+    1: 'Executives and Consultants',
+    2: 'Specialists',
+    3: 'Very Experienced Researchers and Designers',
+    4: 'Somewhat Experienced Researchers',
+    5: 'Less Experienced Researchers'
+}
+
+
+persona_abbrs = {
+    1: 'Execs/Consult',
+    2: 'Specialists',
+    3: 'Very Expd',
+    4: 'Med Expd',
+    5: 'Less Expd'
+}
+
+
 def get_labels(x):
     '''
     assigns subjects to persona groups based on their job title and years of reaearch
