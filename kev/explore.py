@@ -20,10 +20,17 @@ recoder = {
         2: 1,
         3: 1,
     },
-    'r5to2': {
+    'r5to2lo': {
         0: 0,
         1: 0,
         2: 1,
+        3: 1,
+        4: 1,
+    },
+    'r5to2hi': {
+        0: 0,
+        1: 0,
+        2: 0,
         3: 1,
         4: 1,
     },
@@ -53,16 +60,16 @@ recoder = {
 }
 recoder_dictionaries = {
     2: {
-        "important5": 'r5to2',
-        "likely5": 'r5to2',
-        "often4": 'r4to2',
-        "often5": 'r5to2',
+        "important5": 'r5to2hi', # neutral included in no
+        "likely5": 'r5to2lo', # neutral included in yes
+        "often4": 'r4to2', 
+        "often5": 'r5to2lo', # neutral included in yes
         "tenure6": 'r6to2',
     },
     3: {
         "important5": 'r5to3',
         "likely5": 'r5to3',
-        "often4": 'r4to2',
+        "often4": 'r4to2', # three options not practical
         "often5": 'r5to3',
         "tenure6": 'r6to3',            
     },
