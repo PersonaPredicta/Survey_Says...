@@ -13,7 +13,7 @@ index,chk_col,vs_col,p_val
 11,company_small,target,0.5369409673161936
 12,company_med,target,0.7747797281680939
 13,company_large,target,0.855391681273451
-14,num_res_small,target,0.5369409673161936
+14,num_res_small,target,0.8438171029392054
 15,num_res_med,target,0.8209148398651559
 16,num_res_large,target,0.3479728196749799
 17,exp_conduct_res,target,0.1717601303415371
@@ -40,8 +40,8 @@ index,chk_col,vs_col,p_val
 38,factor_diverse_speak,target,0.03223073179888687
 39,factor_topics,target,0.08609148378539004
 40,factor_format_sessions,target,0.07507507692403358
-41,factor_size,target,0.020476768395224634
-42,factor_network,target,0.29922814956437904
+41,factor_size,target,0.29922814956437904
+42,factor_network,target,0.020476768395224634
 43,factor_variety_attend,target,0.0405138148785722
 44,factor_code,target,0.0656047468332527
 45,factor_location,target,0.05546974961306424
