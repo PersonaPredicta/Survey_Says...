@@ -81,6 +81,7 @@ def add_target_to_df(df):
     learning_conference_int = np.array(df['learning_conference'] >1).astype('int32')
     likely_conference_int = np.array(df['likely_conference']>1).astype('int32')
     df['target'] = (learning_conference_int + likely_conference_int) / 2
+    df['targetb'] = (learning_conference_int + likely_conference_int) // 2
     return df
 
 #Feature Selection
