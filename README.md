@@ -1,4 +1,4 @@
-## Persona Predicta Project
+## Survey Sayz... Project
 ### Creating user personas from survey data
 
 
@@ -57,7 +57,7 @@ The online survey consists of 23 main questions, divided among free-text, Likert
 
 
 ### Survey distribution
-Promoted heavily in RM social media (Twitter and LinkedIn). Sent to RM mailing list. Through UX communities that RM manages. Gave first dibs on tickets if finished survey. Book incentive e-book to the first 250 people who finished the survey. Contacted people outside the UX community and asked to send to their communities (business anthropology, market research, usability engineering, information architecture).
+The survey period was in August and September, 2019. RM promoted the survey heavily in RM social media (Twitter and LinkedIn). They sent a link to to the RM mailing list. They marketed it through UX communities managed by RM. RM gave advanced access on tickets to the conference for people who completed the survey. A RM e-book incentive was offered to the first 250 people who finished the survey. RM contacted people outside the UX community and asked to send the survey to their communities (e.g. business anthropology, market research, usability engineering, and information architecture).
 
 
 ### Survey output
@@ -82,9 +82,15 @@ Data preparation included the following
 
 
 ### Hypotheses
-H<sub>0</sub> :
+#### Minimum viable product (MVP)
+H<sub>0</sub> : The data analysis that lead to the intial persona IDs and descriptive statistics CANNOT be reproduced using data science techniques.
 
-H<sub>a</sub> :
+H<sub>a</sub> : Intial persona IDs and descriptive statistics CAN be reproduced using data science techniques. 
+
+##### Final product
+H<sub>0</sub> : A re-classification of personas will result in substantially the same results as the initial personas.
+
+H<sub>a</sub> : Re-classified personas will create substantially different results as the initial personas.
 
 ### Explore
 We attempted to predict each individual respondent's likelyhood to attend the conference score and then identify key features driving the target. We discovered that the questions about likelyhood to attend were the only ones to have any predictive power.  Because of this finding, we abandoned this line of research. 
