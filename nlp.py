@@ -1,4 +1,4 @@
-#Ah la la, Ah la la, Gimme Three wishes, I wanna be that Dirtyfinger and his six...
+#NLP cleaning, preparing and modeling functions
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation, NMF
 from textblob import TextBlob
@@ -145,6 +145,12 @@ def basic_clean(text):
     return text
 
 def create_corpus(df):
+    """
+    Creates a dataframe from the wrangle module that is made of just the qualitative answers from the dataframe
+    that the wrangle module creates. 
+    This dataframe will also aggregate all the answers into a new column that is the concatenation of every
+    answer.
+    """
     df_qual = df.select_dtypes(include='object')
     persona_id = df['persona_id']
     df_qual = df_qual.fillna('n/a')
@@ -154,6 +160,9 @@ def create_corpus(df):
     return df_qual
 
 def create_persona_corpus(df, persona_n):
+    """
+    Same as last funciton, but adds a parameter that will filter down to the persona labels.
+    """
     df_qual = df.select_dtypes(include='object')
     persona_id = df['persona_id']
     df_qual = df_qual.fillna('n/a')
