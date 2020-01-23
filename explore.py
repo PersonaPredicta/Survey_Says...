@@ -371,6 +371,24 @@ def mean_value_by_field(df, field='persona_id'):
     return mean_df
 
 
+def comingle_groups_max(df, cols_to_group, group_to_col):
+    '''
+
+    '''
+    df['__make_new_idx__'] = df.index
+    
+    new_df = df[['__make_new_idx__']].copy()
+    df.drop(columns='__make_new_idx__')
+    for group in group_to_col:
+        new_col = group_to_col[group]
+        group_cols = [col for col in cols_to_group if cols_to_group[col] == group]
+        group_df = df[group_cols]
+        new_df[new_col] = group_df.apply(max, axis=1)
+    new_df = new_df.drop(columns='__make_new_idx__')
+    return new_df
+        
+    
+
 
 if __name__ == '__main__':
     path_prefix=''
