@@ -219,17 +219,20 @@ def pair_topic_with_text(text_column, topic_column, prob_column, name):
     test_df[name + '_probability'] = prob_column
     return test_df
 
-# def pair_topic_with_text(text_column, topic_column, prob_column):
+# def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_words='english'):
 #     """
-#     Takes the raw text column from the wrangle dataframe and the topic column made by the assign_topic function.
-#     Creates a dataframe with each of the inputs as columns.
+#     Accepts a column of text. Uses default parameters for the WordCount Vectorizer.
+#     Returns a dataframe with the word list, and their frequency as the other column.
 #     """
-#     text_column = text_column.reset_index()
-#     test_df = pd.DataFrame()
-#     test_df['text'] = text_column[text_column.columns[1]]
-#     test_df['topic_id'] = topic_column
-#     test_df['probability'] = prob_column
-#     return test_df 
+#     input_column = input_column.dropna().apply(basic_clean)
+#     input_column = input_column.apply(lemmatize)
+#     cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range   
+#     cvfitted = cv.fit_transform(input_column)    
+#     word_list = cv.get_feature_names()    
+#     count_list = cvfitted.toarray().sum(axis=0)
+#     word_counts = {'word_list': word_list, 'count_list': count_list}
+#     df_word_count = pd.DataFrame(data=word_counts)
+#     return df_word_count
 
 def set_stop_words(stop_words):
     """
