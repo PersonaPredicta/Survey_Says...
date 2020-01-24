@@ -93,7 +93,7 @@ H<sub>0</sub> : A re-classification of personas will result in substantially the
 H<sub>a</sub> : Re-classified personas will create substantially different results as the initial personas.
 
 ### Explore
-We attempted to predict each individual respondent's likelyhood to attend the conference score and then identify key features driving the target. We discovered that the questions about likelyhood to attend were the only ones to have any predictive power.  Because of this finding, we abandoned this line of research. 
+We attempted to predict each individual respondent's likelyhood to attend the conference score and then identify key features driving the target. We discovered that the questions about likelihood to attend were the only ones to have any predictive power.  Because of this finding, we abandoned this line of research. 
 
 Replace did any part of your education include research with [none, a little, some, a lot, and gobs*] Leikerts indicating how much learning about research came from various sources: [formal education, self-taught, side classes, or on-the-job]
 Add "no preference" and "it depends" to preferred conference size OR change the existing options to Leikerts
@@ -104,16 +104,15 @@ Change the existing options for preferred conference format to Leikerts OR add "
 ### Model
 ### Qualitative Data
 #### Cleaning/Preparing
-Each qualitative question's responses were prepared for analysis by modifying words down to the their common root (e.g. running -> run, heads -> head), punctuation was removed, a$
+Each qualitative question's responses were prepared for analysis by modifying words down to the their common root (e.g. running -> run, heads -> head), punctuation was removed, as well as words that are unlikely to be useful for analysis (e.g. I, you, is, their).
 #### Vectorizing
-After preperations, an scikit-learn algorithm scans the corpus of responses, creating a list of all words used. Each individual response per question is then given a frequency co$
+After preperations, an scikit-learn algorithm scans the corpus of responses, creating a list of all words used. Each individual response per question is then given a frequency count for each word it contains. The great majority of word counts are at 0. The words to be counted can be manually tuned to ignore based on the minimum and maximum amount of responses that contain the word.
 #### Topic Clustering
-The word count matrix made up of all the reponses word frequency counts are fed to a Latent Dirichtlet Algorithm that iteratively discovers commonalities between responses based $
+The word count matrix made up of all the reponses word frequency counts are fed to a Latent Dirichtlet Algorithm that iteratively discovers commonalities between responses based on their word appearances, and the frequency of the appearances. The algorithm will try to discover a user-specified amount of clusters. These word grouping clusters are the topics extracted from the responses.
 #### Topic Discovery
-Using visual and numerical scores to measure the validity of clusters, the parameters for deciding what words to be used in the word count alogrithm and the LDA algorithm were ad$
+Using visual and numerical scores to measure the validity of clusters, the parameters for deciding what words to be used in the word count alogrithm and the LDA algorithm were adusted until distinct and interpretable topics could be discerned.
 #### Topic Features
-Each response were assigned a unique amount of topics, with each topic having a nominal label for human readability. These topics were added to the dataset they were generated fr$
-
+Each response were assigned a unique amount of topics, with each topic having a nominal label for human readability. These topics were added to the dataset they were generated from as a topic label assigned to each qualitative question, allowing for exploration for the trends and distributions among those answers.
 
 
 ### Minimum viable project (MVP)
