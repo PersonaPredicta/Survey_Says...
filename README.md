@@ -1,5 +1,5 @@
-## Survey Sayz... Project
-### Creating user personas from survey data
+## Survey Says... Project
+### Data Science Analysis of Survey Data
 
 
 ### Team
@@ -25,6 +25,7 @@ To save time and labor, RM wants to automate the process of extracting actionabl
 - Text files for each stage of the data science pipeline, including functions
 - Background information on the survey, resources on building personas
 - Analysis from the first team that used different analysis techniques
+- Environment File of Python libraries used in the repository
 
 https://github.com/PersonaPredicta
 
