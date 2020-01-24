@@ -102,6 +102,18 @@ Change the existing options for preferred conference format to Leikerts OR add "
 
 
 ### Model
+### Qualitative Data
+#### Cleaning/Preparing
+Each qualitative question's responses were prepared for analysis by modifying words down to the their common root (e.g. running -> run, heads -> head), punctuation was removed, a$
+#### Vectorizing
+After preperations, an scikit-learn algorithm scans the corpus of responses, creating a list of all words used. Each individual response per question is then given a frequency co$
+#### Topic Clustering
+The word count matrix made up of all the reponses word frequency counts are fed to a Latent Dirichtlet Algorithm that iteratively discovers commonalities between responses based $
+#### Topic Discovery
+Using visual and numerical scores to measure the validity of clusters, the parameters for deciding what words to be used in the word count alogrithm and the LDA algorithm were ad$
+#### Topic Features
+Each response were assigned a unique amount of topics, with each topic having a nominal label for human readability. These topics were added to the dataset they were generated fr$
+
 
 
 ### Minimum viable project (MVP)
