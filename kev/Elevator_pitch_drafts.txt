@@ -1,1 +1,16 @@
-Our group, Persona Predicta, is applying data science methodologies to survey data collected by a New York publishing and conference-producing firm in order to augment the intuitive conclusions drawn by their staff. The firm ran into problems with the volume of data and is seeking ways improve their ability to glean actionable information from future surveys that may have higher response rates. We’re using clustering and Natural Language Processing techniques to produce models that will help the existing staff hone their ability to develop useful personas so the firm can better target their desired market.Our group, Persona Predicta, is applying data science methodologies to survey data collected by a New York publishing and conference-producing firm in order to augment the intuitive conclusions drawn by their staff. We’re using clustering and Natural Language Processing techniques to produce models that will help the existing staff hone their ability to develop useful personas so the firm can better target their desired market.Our group is applying data science methods to quantitative and qualitative survey data collected by a New York conference-producing company. The company wants to improve their ability to quickly extract actionable information from future surveys. In particular, the company wants to be able to create survey-respondent profiles that can inform conference design and assist with conference marketing.
+Our group, Persona Predicta, is applying data science methodologies to survey data collected by a New York publishing and conference-producing firm in order to augment the intuitive conclusions drawn by their staff. 
+The firm ran into problems with the volume of data and is seeking ways improve their ability to glean actionable information from future surveys that may have higher response rates. 
+We’re using clustering and Natural Language Processing techniques to produce models that will help the existing staff hone their ability to develop useful personas so the firm can better target their desired market.
+
+
+
+Our group is applying data science methods to survey data collected by a conference-producing firm in order to augment the intuitive conclusions drawn by their staff. The firm wants to improve their ability to quickly extract actionable information from future surveys. In particular, the company wants to better inform conference-design decisions and improve the effectiveness of conference marketing. 
+We’ve analyzed the surveys – which included quantitative data and free-form test - and found additional insights about the personas developed by the firm. We also discovered significant differences among respondents based upon their likeliness to attend conferences.
+
+
+
+
+
+
+Our group is applying data science methods to quantitative and qualitative survey data collected by a New York conference-producing company. The company wants to improve their ability to quickly extract actionable information from future surveys. In particular, the company wants to be able to create survey-respondent profiles that can inform conference design and assist with conference marketing.
+
