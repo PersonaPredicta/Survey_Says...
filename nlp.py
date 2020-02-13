@@ -113,14 +113,14 @@ def find_top_documents_per_topic(lda_W, documents,n_docs):
             print(documents[i] + '\n')
             counter += 1
 
-def pyLDAvis(input_column, n_topics):
-    matrix, vector = create_tfidf_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1))
-    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
-    LDA.fit(matrix)
-    pyLDAvis.sklearn.prepare(LDA, matrix, vector)
+# def pyLDAvis(input_column, n_topics):
+#     matrix, vector = create_tfidf_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1))
+#     LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+#     LDA.fit(matrix)
+#     pyLDAvis.sklearn.prepare(LDA, matrix, vector)
 
-def show_pyLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
-    pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
+# def show_pyLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
+#     pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
 
 
 def lemmatize(text):
@@ -226,7 +226,7 @@ def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_
     """
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
-    cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range   
+    cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)   
     blob = cv.fit_transform(input_column)    
     word_list = cv.get_feature_names()    
     count_list = blob.toarray().sum(axis=0)
