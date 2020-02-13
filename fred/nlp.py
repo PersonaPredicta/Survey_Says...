@@ -243,3 +243,16 @@ def set_stop_words(stop_words):
     from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS as esw
     stopWords = stop_words + list(esw) 
     return stopWords
+
+def create_biganswer_col():
+    """
+    """
+    blob = df.select_dtypes('object')
+    blob = blob.fillna('n/a')
+    blob = blob.astype('str')
+    col_names = list(blob.columns)
+    spam = [blob[i] for i in col_names]
+    blank = spam[13]
+    for i in range(len(spam)-1):
+        blank = blank + spam[i]
+    return blank
