@@ -227,9 +227,9 @@ def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
     cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range   
-    cv_fit = cv.fit_transform(input_column)    
+    blob = cv.fit_transform(input_column)    
     word_list = cv.get_feature_names()    
-    count_list = cv_fit.toarray().sum(axis=0)
+    count_list = blob.toarray().sum(axis=0)
     word_counts = {'word_list': word_list, 'count_list': count_list}
     df_word_count = pd.DataFrame(data=word_counts)
     return df_word_count

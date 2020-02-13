@@ -227,9 +227,9 @@ def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
     cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range   
-    cv_fit = cv.fit_transform(input_column)    
+    blob = cv.fit_transform(input_column)    
     word_list = cv.get_feature_names()    
-    count_list = cv_fit.toarray().sum(axis=0)
+    count_list = blob.toarray().sum(axis=0)
     word_counts = {'word_list': word_list, 'count_list': count_list}
     df_word_count = pd.DataFrame(data=word_counts)
     return df_word_count
@@ -243,3 +243,20 @@ def set_stop_words(stop_words):
     from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS as esw
     stopWords = stop_words + list(esw) 
     return stopWords
+
+def create_biganswer_col(df):
+    """
+    Accepts a DataFrame as an input. The dataframe will be reduced to the columns that are of a string/object.
+    Nulls will be made into a string value called 'n/a'. Each column is double-checked as a string type
+    by using the .astype() method.
+    The returned value is a Series that is all the column's values smashed into one column.
+    """
+    df_quals = df.select_dtypes('object')
+    df_quals = df_quals.fillna('n/a')
+    df_quals = df_quals.astype('str')
+    col_names = list(df_quals.columns)
+    list_of_cols = [df_quals[i] for i in col_names]
+    big_answer = list_of_cols[13]
+    for i in range(len(list_of_cols)-1):
+        big_answer = big_answer + list_of_cols[i]
+    return big_answer
