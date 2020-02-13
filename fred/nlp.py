@@ -244,15 +244,16 @@ def set_stop_words(stop_words):
     stopWords = stop_words + list(esw) 
     return stopWords
 
-def create_biganswer_col():
+def create_biganswer_col(df):
     """
+    
     """
-    blob = df.select_dtypes('object')
-    blob = blob.fillna('n/a')
-    blob = blob.astype('str')
-    col_names = list(blob.columns)
-    spam = [blob[i] for i in col_names]
-    blank = spam[13]
-    for i in range(len(spam)-1):
-        blank = blank + spam[i]
-    return blank
+    df_quals = df.select_dtypes('object')
+    df_quals = df_quals.fillna('n/a')
+    df_quals = df_quals.astype('str')
+    col_names = list(df_quals.columns)
+    list_of_cols = [df_quals[i] for i in col_names]
+    big_answer = list_of_cols[13]
+    for i in range(len(list_of_cols)-1):
+        big_answer = big_answer + list_of_cols[i]
+    return big_answer
