@@ -162,16 +162,16 @@ def create_persona_corpus(df, persona_n):
     df_qual['persona_id'] = persona_id
     return df_qual[df_qual.persona_id == persona_n]
 
-def show_column_keywords(input_column, max_df=.3, min_df=2, ngram_range=(1,3), n_keywords=20, stop_words='english'):
-    """
-    Use a column/Series. Indicate the maximum and minimum amount of documents the words to be anlayzed. And ngram size
-    Returns a list 
-    """
-    input_column = input_column.dropna().apply(basic_clean)
-    input_column = input_column.apply(lemmatize)
-    count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
-    count_vect.fit_transform(input_column)
-    return list(count_vect.vocabulary_.keys())[:n_keywords]
+# def show_column_keywords(input_column, max_df=.3, min_df=2, ngram_range=(1,3), n_keywords=20, stop_words='english'):
+#     """
+#     Use a column/Series. Indicate the maximum and minimum amount of documents the words to be anlayzed. And ngram size
+#     Returns a list 
+#     """
+#     input_column = input_column.dropna().apply(basic_clean)
+#     input_column = input_column.apply(lemmatize)
+#     count_vect = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)
+#     count_vect.fit_transform(input_column)
+#     return list(count_vect.vocabulary_.keys())[:n_keywords]
 
 def assign_topic_column(input_column, max_df=.8, min_df=2, stop_words='english', ngram_range=(1,3), n_components=3):
     """
