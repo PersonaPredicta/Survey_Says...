@@ -89,17 +89,38 @@ def create_LDA_model(matrix, vector, n_topics=5):
 
 #Wordcounts or Ngrams Counts
 
+# def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_words='english'):
+#     """
+#     Accepts a column of text. Uses default parameters for the WordCount Vectorizer.
+#     Returns a dataframe with the word list, and their frequency as the other column.
+#     """
+#     input_column = input_column.dropna().apply(basic_clean)
+#     input_column = input_column.apply(lemmatize)
+#     cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)   
+#     blob = cv.fit_transform(input_column)    
+#     word_list = cv.get_feature_names()    
+#     count_list = blob.toarray().sum(axis=0)
+#     word_counts = {'word_list': word_list, 'count_list': count_list}
+#     df_word_count = pd.DataFrame(data=word_counts)
+#     return df_word_count
+
 def find_word_counts(input_column, max_df=.3, min_df=2, ngram_range=(1,3), stop_words='english'):
-    """
-    Accepts a column of text. Uses default parameters for the WordCount Vectorizer.
-    Returns a dataframe with the word list, and their frequency as the other column.
-    """
+#Cleans up nulls, weird characters, and reduces them to lemmas
     input_column = input_column.dropna().apply(basic_clean)
     input_column = input_column.apply(lemmatize)
+
+#cv is the Vector, cv_fit is the Matrix
     cv = CountVectorizer(max_df=max_df, min_df=min_df, stop_words=stop_words, ngram_range=ngram_range)   
-    blob = cv.fit_transform(input_column)    
+    cv_fit=cv.fit_transform(input_column)
+    
+#An array of all the words that make up the Vector
     word_list = cv.get_feature_names()    
-    count_list = blob.toarray().sum(axis=0)
+#An array of the freq-counts of each of the words in word_list
+#   .toarray() is a matrix that is as wide as the word list, tall as the amount of rows.  
+#   sum(axis=0) collapses the matrix into a vector, summing each column into one value. It will be as wide as word_list
+    count_list = cv_fit.toarray().sum(axis=0)
+
+#The dictionary that will define what the DataFrame will be shaped
     word_counts = {'word_list': word_list, 'count_list': count_list}
     df_word_count = pd.DataFrame(data=word_counts)
     return df_word_count
