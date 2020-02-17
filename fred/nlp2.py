@@ -155,3 +155,65 @@ def assign_topic_column_probability(input_column, max_df=.8, min_df=2, stop_word
     topic_doc_df = pd.DataFrame(lda_H)
     return topic_doc_df.max(axis=1)
 
+def find_top_documents_per_topic(lda_W, documents,n_docs):
+    """
+    lda_W is LDA.fit(matrix).transform(matrix)
+        or the output of create_LDA_model().transform(matrix from create_wordcount_matrix)
+    n_top_docs is a integer for how many documents you want to represent a topic
+    """
+    df_W = pd.DataFrame(lda_W, index=documents.index)
+    for column in df_W:
+        indexes = df_W[column].sort_values().tail(n_docs).index
+        print(f'Top {n_docs} Documents for Topic {column}: \n')
+        counter = 1
+        for i in indexes:
+            print(f"Document {counter}")
+            print(documents[i] + '\n')
+            counter += 1
+
+#TOPIC EXPLORATION with pyLDAvis
+
+def show_pyLDAvis_dashboard2(input_column, n_topics):
+    """
+    Requires just the question column to create the dashboard.
+    """
+    matrix, vector = create_wordcount_matrix(input_column, max_df=0.8, min_df=2, ngram=(1,1))
+    LDA = LatentDirichletAllocation(n_components=n_topics, random_state=42)
+    LDA.fit(matrix)
+    pyLDAvis.sklearn.prepare(LDA, matrix, vector)
+
+def show_pyLDAvis_dashboard(lda_fitted_model, doc_term_matrix, vector):
+    """
+    Requires the create_LDA_model and create_wordcount_matrix outputs as parameters.
+    """
+    pyLDAvis.sklearn.prepare(lda_fitted_model, doc_term_matrix, vector)
+
+#Sentiment Analysis
+
+def find_polarity(input_text):
+    """
+    Takes one document and outputs a polarity score. -1 is Very Negative, 1 is Super Positive
+    This function should be applied to a column and outputted to a new column.
+    """
+    return TextBlob(input_text).sentiment.polarity
+
+
+def find_subjectivity(input_text):
+    """
+    Takes one document and outputs a subjectivity score. 0 is cold objectivity, 1 is very subjective
+    This function should be applied to a column and outputted to a new column.
+    """
+    return TextBlob(input_text).sentiment.subjectivity
+
+
+def create_sentiment_df(input_column):
+    """
+    Accepts a column of text data. Returns a dataframe with the original text with their polarity and 
+    subjectivity scores appended to it.
+    """
+    cols = ['text','polarity','subjectivity']
+    df = pd.DataFrame(columns=cols)
+    df['text'] = input_column
+    df['polarity'] = input_column.apply(find_polarity)
+    df['subjectivity'] = input_column.apply(find_subjectivity)
+    return df
